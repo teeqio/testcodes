@@ -22,7 +22,7 @@ jobs:
       - name: Run merge script
         run: python merge.py
 
-      - - name: Commit updated index
+      - name: Commit updated index
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
