@@ -2,11 +2,17 @@ import json
 import urllib.request
 import urllib.error
 
+# List of repository index URLs to combine
 REPO_URLS = [
+    # Manga
     "https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json",
-    "https://raw.githubusercontent.com/yuzono/tachiyomi-extensions/repo/index.min.json",
+    "https://raw.githubusercontent.com/yuzono/manga-repo/repo/index.min.json",
+    "https://raw.githubusercontent.com/zosetsu-repo/tachi-repo/repo/index.min.json",
+    "https://raw.githubusercontent.com/Kareadita/tach-extension/repo/index.min.json",
+    "https://raw.githubusercontent.com/Suwayomi/tachiyomi-extension/repo/index.min.json",
+    # Anime
+    "https://raw.githubusercontent.com/yuzono/anime-repo/repo/index.min.json",
     "https://raw.githubusercontent.com/Secozzi/aniyomi-extensions/repo/index.min.json",
-    "https://raw.githubusercontent.com/yuzono/anime-extensions/repo/index.min.json",
 ]
 
 
@@ -21,6 +27,7 @@ def fetch_and_merge(urls, timeout=15):
             with urllib.request.urlopen(req, timeout=timeout) as response:
                 data = json.loads(response.read().decode("utf-8"))
 
+            # Handles both list-root and object-root formats
             extensions = data if isinstance(data, list) else (data.get("extensions") or [])
 
             added = 0
